@@ -60,7 +60,7 @@
   find Dickson
   # find multiple with some keywords
   find Charlie Betsy
-
+  
 ##########################################################
 # test delete person command
 ##########################################################
@@ -90,7 +90,19 @@
   # listing indexes get updated on next request
   delete 1
   list
+  
+##########################################################
+# test sort persons command
+##########################################################
 
+  # show last shown list sorted
+  sort
+  add Achrodinge p/163514 e/achrodinge@nus.edu
+  sort
+  # show all sorted
+  list
+  sort
+	
 ##########################################################
 # test clear command
 ##########################################################
@@ -98,7 +110,7 @@
   # clears all
   clear
   list
-
+  
 ##########################################################
 # test exit command
 ##########################################################

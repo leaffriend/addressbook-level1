@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.util.Optional;
@@ -120,6 +121,11 @@ public class AddressBook {
     private static final String COMMAND_CLEAR_WORD = "clear";
     private static final String COMMAND_CLEAR_DESC = "Clears address book permanently.";
     private static final String COMMAND_CLEAR_EXAMPLE = COMMAND_CLEAR_WORD;
+    
+    private static final String COMMAND_SORT_WORD = "sort";
+    private static final String COMMAND_SORT_DESC = "Displays previously shown list alphabetically. "
+    											  + "If no list was displayed, displays all person as a list with index numbers alphabetically.";
+    private static final String COMMAND_SORT_EXAMPLE = COMMAND_SORT_WORD;
 
     private static final String COMMAND_HELP_WORD = "help";
     private static final String COMMAND_HELP_DESC = "Shows program usage instructions.";
@@ -357,6 +363,8 @@ public class AddressBook {
             return executeDeletePerson(commandArgs);
         case COMMAND_CLEAR_WORD :
             return executeClearAddressBook();
+        case COMMAND_SORT_WORD :
+        	return executeSortList();
         case COMMAND_HELP_WORD :
             return getUsageInfoForAllCommands();
         case COMMAND_EXIT_WORD :
@@ -559,6 +567,19 @@ public class AddressBook {
     }
 
     /**
+     * Displays previous list shown to the user; in alphabetical order
+     * 
+     * @return feedback display message for the operation result
+     */
+    private static String executeSortList() {
+		ArrayList<HashMap<PersonProperty, String>> toBeDisplayed = getLatestPersonListingView();
+		Collections.sort(toBeDisplayed,PersonNameComparator);
+		showToUser(toBeDisplayed);
+    	return getMessageForPersonsDisplayedSummary(toBeDisplayed);
+	}
+
+
+    /**
      * Request to terminate the program.
      *
      * @return feedback display message for the operation result
@@ -670,8 +691,8 @@ public class AddressBook {
     private static ArrayList<HashMap<PersonProperty,String>> getLatestPersonListingView() {
         return latestPersonListingView;
     }
-
-
+    
+    
     /*
      * ===========================================
      *             STORAGE LOGIC
@@ -1066,6 +1087,7 @@ public class AddressBook {
         return getUsageInfoForAddCommand() + LS
                 + getUsageInfoForFindCommand() + LS
                 + getUsageInfoForViewCommand() + LS
+                + getUsageInfoForSortCommand() + LS
                 + getUsageInfoForDeleteCommand() + LS
                 + getUsageInfoForClearCommand() + LS
                 + getUsageInfoForExitCommand() + LS
@@ -1124,6 +1146,16 @@ public class AddressBook {
         return String.format(MESSAGE_COMMAND_HELP, COMMAND_LIST_WORD, COMMAND_LIST_DESC) + LS
                 + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_LIST_EXAMPLE) + LS;
     }
+    
+    /**
+     * Builds string for showing 'sort' command usage instruction
+     *
+     * @return  'view' command usage instruction
+     */
+    private static String getUsageInfoForSortCommand() {
+        return String.format(MESSAGE_COMMAND_HELP, COMMAND_SORT_WORD, COMMAND_SORT_DESC) + LS
+                + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_SORT_EXAMPLE) + LS;
+    }
 
     /**
      * Builds string for showing 'help' command usage instruction
@@ -1174,4 +1206,21 @@ public class AddressBook {
         return new ArrayList<String>(Arrays.asList(toSplit.trim().split("\\s+")));
     }
 
+    /**
+     * Comparator for sorting the list of person by their name
+     */
+    public static Comparator<HashMap<PersonProperty, String>> PersonNameComparator = new Comparator<HashMap<PersonProperty,String>>() {
+
+    	public int compare(HashMap<PersonProperty,String> person1, HashMap<PersonProperty,String> person2) {
+    	   String PersonName1 = getNameFromPerson(person1).toUpperCase();
+    	   String PersonName2 = getNameFromPerson(person2).toUpperCase();
+
+    	   //ascending order
+    	   return PersonName1.compareTo(PersonName2);
+
+        }
+
+		
+	};
+    
 }

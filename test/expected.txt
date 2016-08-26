@@ -17,6 +17,9 @@
 || list: Displays all persons as a list with index numbers.
 || 	Example: list
 || 
+|| sort: Displays previously shown list alphabetically. If no list was displayed, displays all person as a list with index numbers alphabetically.
+||	Example: sort
+|| 
 || delete: Deletes a person identified by the index number used in the last find/list call.
 || 	Parameters: INDEX
 || 	Example: delete 1
@@ -223,6 +226,35 @@
 || 	2. Dickson Ee  Phone Number: 444444  Email: dickson@nus.edu.sg
 || 
 || 2 persons found!
+|| ===================================================
+|| Enter command: || [Command entered:  sort]
+||	1. Betsy Choo  Phone Number: 222222  Email: benchoo@nus.edu.sg
+||	2. Dickson Ee  Phone Number: 444444  Email: dickson@nus.edu.sg
+|| 
+|| 2 persons found!
+|| ===================================================
+|| Enter command: || [Command entered:  add Achrodinge p/163514 e/achrodinge@nus.edu]
+|| New person added: Achrodinge, Phone: 163514, Email: achrodinge@nus.edu
+|| ===================================================
+|| Enter command: || [Command entered:  sort]
+||	1. Betsy Choo  Phone Number: 222222  Email: benchoo@nus.edu.sg
+||	2. Dickson Ee  Phone Number: 444444  Email: dickson@nus.edu.sg
+|| 
+|| 2 persons found!
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+||	1. Betsy Choo  Phone Number: 222222  Email: benchoo@nus.edu.sg
+||	2. Dickson Ee  Phone Number: 444444  Email: dickson@nus.edu.sg
+||	3. Achrodinge  Phone Number: 163514  Email: achrodinge@nus.edu
+|| 
+|| 3 persons found!
+|| ===================================================
+|| Enter command: || [Command entered:  sort]
+||	1. Achrodinge  Phone Number: 163514  Email: achrodinge@nus.edu
+||	2. Betsy Choo  Phone Number: 222222  Email: benchoo@nus.edu.sg
+||	3. Dickson Ee  Phone Number: 444444  Email: dickson@nus.edu.sg
+|| 
+|| 3 persons found!
 || ===================================================
 || Enter command: || [Command entered:  clear]
 || Address book has been cleared!
